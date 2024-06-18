@@ -50,7 +50,7 @@
         "dev": "yarn watch",
         "clean": "rm -rf types dist lib",
         "test": "yarn test-server && yarn test-client",
-        "test-ci": "yarn test",
+        "test-ci": "yarn test && yarn test-e2e",
         "test-client": "jest --config jest.config.json --max-workers=2",
         "test-server": "jest --config jest.config.ssr.json",
         "test-watch": "jest --watch --coverage --coverageReporters=lcov --config jest.config.json",
