@@ -70,7 +70,9 @@ test: bootstrap
 
 test-ci: bootstrap
 	mkdir -p $(TEST_REPORT_PATH)
-	JEST_JUNIT_OUTPUT=$(TEST_REPORT_PATH)/framer-motion.xml yarn test-ci
+	JEST_JUNIT_OUTPUT=$(TEST_REPORT_PATH)/framer-motion.xml yarn test
+	JEST_JUNIT_OUTPUT=$(TEST_REPORT_PATH)/framer-motion-e2e.xml yarn test-e2e --no-cache $(if $(CI),$(shell circleci tests glob "packages/framer-motion/cypress/integration/*.ts" | circleci tests split) --reporters=default --reporters=jest-junit)
+
 
 lint: bootstrap
 	yarn lint
