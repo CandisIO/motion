@@ -68,11 +68,14 @@ publish: clean bootstrap
 test: bootstrap
 	yarn test
 
-test-ci: bootstrap
+test-ci-mkdir:
 	mkdir -p $(TEST_REPORT_PATH)
-	JEST_JUNIT_OUTPUT=$(TEST_REPORT_PATH)/framer-motion.xml yarn test
-	JEST_JUNIT_OUTPUT=$(TEST_REPORT_PATH)/framer-motion-e2e.xml yarn test-e2e --no-cache $(if $(CI),$(shell circleci tests glob "packages/framer-motion/cypress/integration/*.ts" | circleci tests split) --reporters=default --reporters=jest-junit)
 
+test-ci-jest: bootstrap test-ci-mkdir
+	JEST_JUNIT_OUTPUT=$(TEST_REPORT_PATH)/framer-motion.xml yarn test
+
+test-ci-e2e: bootstrap test-ci-mkdir
+	JEST_JUNIT_OUTPUT=$(TEST_REPORT_PATH)/framer-motion-e2e.xml yarn test-e2e --no-cache $(if $(CI),$(shell circleci tests glob "packages/framer-motion/cypress/integration/*.ts" | circleci tests split))
 
 lint: bootstrap
 	yarn lint

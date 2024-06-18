@@ -18,9 +18,11 @@ jobs:
                       # fallback to using the latest cache if no exact match is found
                       - v1-dependencies-
 
-            # run tests!
             - run: |
-                  make test-ci
+                  make test-ci-jest
+
+            - run: |
+                  make test-ci-e2e
 
             - save_cache:
                   paths:
