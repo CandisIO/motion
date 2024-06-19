@@ -32,7 +32,6 @@ export function handoffOptimizedAppearAnimation(
     const { animation, startTime } = optimisedAnimation
 
     const cancelAnimation = () => {
-        console.log("de;ete that shiz")
         appearAnimationStore.delete(storeId)
 
         if (frame) {
