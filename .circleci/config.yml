@@ -1,6 +1,5 @@
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
-version: 2.1
 jobs:
     build:
         docker:
@@ -19,8 +18,12 @@ jobs:
                       - v1-dependencies-
 
             - run:
-                  name: Compile tests
+                  name: E2E tests
                   command: make test-ci-e2e
+
+            - run:
+                  name: Test Jest
+                  command: make test-ci-jest
 
             # - run: |
             #       make test-ci-jest
