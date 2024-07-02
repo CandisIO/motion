@@ -74,7 +74,7 @@ test-ci-mkdir:
 test-ci-jest: bootstrap test-ci-mkdir
 	JEST_JUNIT_OUTPUT=$(TEST_REPORT_PATH)/framer-motion.xml yarn test
 
-test-ci-e2e: bootstrap test-ci-mkdir
+test-ci-e2e: build test-ci-mkdir
 	yarn start-server-and-test "yarn dev-server" http://localhost:9990 "cd packages/framer-motion && cypress run --headless"
 
 ##	yarn start-server-and-test "yarn dev-server" http://localhost:9990 "cd packages/framer-motion && cypress run --headless $(if $(CI),$(shell circleci tests glob "packages/framer-motion/cypress/integration/*.ts" | circleci tests split))"
