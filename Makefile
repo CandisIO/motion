@@ -72,13 +72,10 @@ test-ci-mkdir:
 	mkdir -p $(TEST_REPORT_PATH)
 
 test-ci-jest: bootstrap test-ci-mkdir
-	JEST_JUNIT_OUTPUT=$(TEST_REPORT_PATH)/framer-motion.xml yarn test
+	yarn test
 
 test-ci-e2e: build test-ci-mkdir
 	yarn start-server-and-test "yarn dev-server" http://localhost:9990 "cd packages/framer-motion && cypress run --headless --spec $(if $(CI),$(shell cd packages/framer-motion && circleci tests glob "cypress/integration/*.ts" | circleci tests split))"
-
-##	yarn start-server-and-test "yarn dev-server" http://localhost:9990 "cd packages/framer-motion && cypress run --headless $(if $(CI),$(shell circleci tests glob "packages/framer-motion/cypress/integration/*.ts" | circleci tests split))"
-##	JEST_JUNIT_OUTPUT=$(TEST_REPORT_PATH)/framer-motion-e2e.xml yarn test-e2e --no-cache
 
 lint: bootstrap
 	yarn lint

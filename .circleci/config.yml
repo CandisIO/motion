@@ -20,17 +20,16 @@ jobs:
             - run:
                   name: Test Jest
                   command: make test-ci-jest
+                  environment:
+                      JEST_JUNIT_OUTPUT: test_reports/framer-motion.xml
 
-            # - run: |
-            #       make test-ci-jest
+            - store_test_results:
+                  path: test_reports
 
             - save_cache:
                   paths:
                       - node_modules
                   key: v1-dependencies-{{ checksum "package.json" }}
-
-        # "test-e2e": "yarn test-e2e-html && yarn test-e2e-react",
-        # "test-e2e-html": "node ../../dev/inc/collect-html-tests.js && start-server-and-test 'cd ../../; yarn dev-server; cd packages/framer-motion' http://localhost:8000 'cypress run -s cypress/tests/appear.ts --config baseUrl=http://localhost:8000/ && cypress run -s cypress/tests/projection.ts --config baseUrl=http://localhost:8000/'",
 
     test-e2e:
         docker:
@@ -51,17 +50,16 @@ jobs:
             - run:
                   name: E2E tests
                   command: make test-ci-e2e
+                  environment:
+                      JEST_JUNIT_OUTPUT: test_reports/framer-motion-e2e.xml
 
-            # - run: |
-            #       make test-ci-jest
+            - store_test_results:
+                  path: test_reports
 
             - save_cache:
                   paths:
                       - node_modules
                   key: v1-dependencies-{{ checksum "package.json" }}
-
-        # "test-e2e": "yarn test-e2e-html && yarn test-e2e-react",
-        # "test-e2e-html": "node ../../dev/inc/collect-html-tests.js && start-server-and-test 'cd ../../; yarn dev-server; cd packages/framer-motion' http://localhost:8000 'cypress run -s cypress/tests/appear.ts --config baseUrl=http://localhost:8000/ && cypress run -s cypress/tests/projection.ts --config baseUrl=http://localhost:8000/'",
 
 workflows:
     version: 2
