@@ -36,7 +36,7 @@ jobs:
             - image: cimg/node:lts-browsers
 
         working_directory: ~/repo
-        parallelism: 4
+        parallelism: 6
         steps:
             - checkout
 
