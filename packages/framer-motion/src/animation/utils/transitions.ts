@@ -13,6 +13,7 @@ import { warning } from "hey-listen"
 import { getAnimatableNone } from "../../render/dom/value-types/animatable-none"
 import { instantAnimationState } from "../../utils/use-instant-transition-state"
 import { resolveFinalValueInKeyframes } from "../../utils/resolve-value"
+import { MotionGlobalConfig } from "utils/GlobalConfig"
 
 type StopAnimation = { stop: () => void }
 
@@ -225,7 +226,7 @@ function getAnimation(
 
     return !isOriginAnimatable ||
         !isTargetAnimatable ||
-        valueTransition.type === false
+        valueTransition.type === false || MotionGlobalConfig.skipAnimations
         ? set
         : start
 }
