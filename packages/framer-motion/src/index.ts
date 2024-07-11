@@ -155,3 +155,4 @@ export { IProjectionNode } from "./projection/node/types"
  */
 export { useAnimatedState as useDeprecatedAnimatedState } from "./animation/use-animated-state"
 export { useInvertedScale as useDeprecatedInvertedScale } from "./value/use-inverted-scale"
+export * from './utils/GlobalConfig'
